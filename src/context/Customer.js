@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-const customerContext = React.createContext();
+const CustomerContext = React.createContext();
 
 const CustomerProvider = ({ children }) => {
   const [customer, setCustomer] = useState(null);
-    
+
   return (
-    <customerContext.Provider value={{customer, setCustomer}}>
+    <CustomerContext.Provider value={{ customer, setCustomer }}>
       {children}
-    </customerContext.Provider>
+    </CustomerContext.Provider>
   );
 };
 
-export { customerContext, CustomerProvider };
+export { CustomerContext, CustomerProvider };
