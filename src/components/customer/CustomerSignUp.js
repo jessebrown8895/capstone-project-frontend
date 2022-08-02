@@ -23,7 +23,7 @@ const CustomerSignUp = () => {
           "Content-Type": "application/json",
           Accept: "applications/json",
         },
-        body: JSON.stringify({ signUp }),
+        body: JSON.stringify(signUp)
       }).then((r) => {
         if (r.ok) {
           console.log(r);
@@ -41,7 +41,8 @@ const CustomerSignUp = () => {
         <Form.Label>name</Form.Label>
         <Form.Control
           type="name"
-          onChange={(e) => s}
+          name="name"
+          onChange={handleChange}
           value={signUp.name}
           placeholder="name"
         />
@@ -50,6 +51,7 @@ const CustomerSignUp = () => {
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
+          name="email"
           onChange={handleChange}
           value={signUp.email}
           placeholder="Enter email"
@@ -63,6 +65,7 @@ const CustomerSignUp = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
+          name="password"
           onChange={handleChange}
           value={signUp.password}
           placeholder="Password"
