@@ -9,7 +9,6 @@ function CustomerLogin() {
   const [password, setPassword] = useState(null)
   const navigate = useNavigate()
   const { setCustomer } = useContext(CustomerContext)
-
   function handleSubmit(e) {
     e.preventDefault();
     fetch(PORT + "/api/customer-login",{
@@ -20,10 +19,10 @@ function CustomerLogin() {
     body: JSON.stringify({email, password}),
     }).then((r) => {
       if (r.ok) {
-        console.log(r)
         r.json().then(data => {
+          console.log(data)
           localStorage.setItem("jwt", data.jwt)
-          setCustomer(data.customer)
+          setCustomer(data.user)
           navigate("/customer-home")
         })
       }

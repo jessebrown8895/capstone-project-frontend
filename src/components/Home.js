@@ -8,9 +8,8 @@ const Home = () => {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Nav className="me-auto">
-            <Nav.Link href="customer-login">
-              customer Login
-            </Nav.Link>
+            <Nav.Link href="customer-login">customer Login</Nav.Link>
+            {/* <Nav.Link href="/customer-products">Products</Nav.Link> */}
             <Nav.Link href="barber-login">Barber Login</Nav.Link>
           </Nav>
         </Container>

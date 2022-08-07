@@ -1,32 +1,52 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import React, { useEffect, useState, useContext} from "react";
+import {BrowserRouter as Router,Routes,Route,useNavigate} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from './components/Home';
 import BarberLogin from './components/Barber/BarberLogin';
 import CustomerLogin from './components/customer/CustomerLogin';
-import { CustomerProvider } from "./context/Customer"
-import { BarberProvider } from "./context/Barber"
 import CustomerHome from './components/customer/CustomerHome';
 import CustomerSignUp from './components/customer/CustomerSignUp';
-export const context = React.createContext();
-function App() {
+import CustomerProducts from "./components/customer/CustomerProducts";
+import { CustomerContext } from "./context/Customer";
+// import CustomerProducts from "./components/customer/CustomerProducts";
 
+
+
+
+export const context = React.createContext();
+
+
+function App() {
+  const [products, setProducts] = useState("");
+  const {customer} = useContext(CustomerContext)
+ 
+
+  
+    useEffect(() => {
+      fetch(PORT + "/api/products", {
+        method: "GET",
+      })
+        .then((r) => r.json())
+        .then((products) => setProducts(products));
+    }, [])
+    
+      
+ 
 
   return (
     <div>
-      <BarberProvider>
-        <CustomerProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/Barber-login" element={<BarberLogin />} />
-              <Route path="/Customer-login" element={<CustomerLogin />} />
-              <Route path="/Customer-home" element={<CustomerHome />} />
-              <Route path="/Sign-up" element={<CustomerSignUp />} />
-            </Routes>
-          </Router>
-        </CustomerProvider>
-      </BarberProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Sign-up" element={<CustomerSignUp />} />
+          <Route path="/Barber-login" element={<BarberLogin />} />
+          <Route path="/Customer-login" element={<CustomerLogin />} />
+          <Route path="/Customer-home" element={<CustomerHome />} />
+          <Route path="/Customer-Products" element={<CustomerProducts products={products}/>} />
+        </Routes>
+      </Router>
+        
+     
     </div>
   );
 }
